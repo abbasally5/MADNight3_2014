@@ -1,13 +1,9 @@
 var app = angular.module('MADNight', ['ngSanitize']);
-/*
-app.factory('quotes', [function() {
-	var arr = [
-		"The quick brown fox jumped over the lazy dog",
-		"asdfasdfadsfadsf"
-		];
-	return arr;
+
+app.factory('typed', [function() {
+	return '';
 }]);
-*/
+
 app.controller('typeCtrl', ['$scope', 
 	function($scope) {
 

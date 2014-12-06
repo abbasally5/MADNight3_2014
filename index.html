@@ -9,13 +9,13 @@
 		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"	type="text/css" />
 		<link rel="stylesheet" type="text/css" href="style.css" />
 
-		<title>MAD Hack Night 3</title>
+		<title>Local Hack Day</title>
 	</head>
 	<body ng-app="MADNight">
 		<div class="navbar navbar-default" role="navigation">
 			<div class="container-fluid col-md-6 col-md-offset-3">
 				<div class="navbar-header">
-					<h1>MAD Night 3</h1>
+					<h1>Local Hack Day</h1>
 				</div>
 			</div>					
 		</div>
@@ -30,20 +30,41 @@
 					</div>
 					<div class="form-group panel-body">
 						<input type="text" id="text" class="form-control input-lg" 
-						placeholder="Type Here" ng-model="typed">
+						placeholder="Type Here" ng-model="typed" onkeypress="incrCount()">
 					</div>
 					<div class="panel-body">
 						<button class="btn btn-primary" ng-click="nextQuote()">Next Quote!</button>
 					</div>
-				</div>
-				<div class="stats panel-primary col-md-3 col-xs-3">
-					<div class="panel-heading">
-						<h4>WPM</h4>
+					<div class="stats">
+						<div class="accuracy panel-primary col-xs-3">
+							<div class="panel-heading">
+								<h4>Accuracy</h4>
+							</div>
+							<div class="panel-body" id="stat1" 
+								ng-bind-html="accuracy()">
+							</div>
+						</div>
+						<div class="lpm panel-primary col-xs-3">
+							<div class="panel-heading">
+								<h4>LPM</WPM>
+							</div>
+							<div class="panel-body" id="stat2" 
+								ng-bind-html="LPM()">
+							</div>
+						</div>
+						<div class="wpm panel-primary col-xs-3">
+							<div class="panel-heading">
+								<h4>WPM</WPM>
+							</div>
+							<div class="panel-body" id="stat2" 
+								ng-bind-html="WPM()">
+							</div>
+						</div>
 					</div>
-					<div class="panel-body" >
+					
 
-					</div>
 				</div>
+
 			</div> 
 
 						

@@ -1,4 +1,4 @@
-var app = angular.module('MADNight', ['ngSanitize']);
+var app = angular.module('MADNight', ['ngSanitize', 'chartjs']);
 
 app.factory('typed', [function() {
 	return '';
@@ -49,10 +49,10 @@ app.controller('typeCtrl', ['$scope',
 			if (getCount() > 0) {
 				var percent = stringCorrect($scope.typed, currentQuote).length/getCount();
 				//console.log(percent);
-				return "<span>" + percent.toFixed(2) * 100+ "%</span>";
+				return percent.toFixed(2) * 100;
 			}
 			else
-				return "<span>" + getCount()+ "%</span>";			
+				return getCount();			
 		};
 
 		$scope.LPM = function() {
@@ -61,22 +61,58 @@ app.controller('typeCtrl', ['$scope',
 				var letters = stringCorrect($scope.typed, currentQuote).length;
 				var minutes = getMin();
 				//console.log(letters + " " + minutes);
-				if (minutes == 0 || letters == 0) return 0;
-				return "<span>" + (letters/minutes).toFixed(0) + "</span>";
+				if (minutes == 0 || letters == 0) return 0 ;
+				return (letters/minutes).toFixed(0);
 			}
-			else return "<span>" + 0 + "</span>";
+			else return 0;
 		}
 
 		$scope.WPM = function() {
 			if (getCount() > 0) {
 				var words = stringCorrect($scope.typed, currentQuote).length/5;
 				var minutes = getMin();
-				if (minutes == 0 || words == 0) return 0;
-				return "<span>" + (words/minutes).toFixed(0) + "</span>";
+				if (minutes == 0 || words == 0) return  0 ;
+				return (words/minutes).toFixed(0) ;
 			}
 			else
-				return "<span>" + 0 + "</span>"
+				return 0 ;
 		}
+
+		$scope.netWPM = function() {
+			if (getCount() > 0) {
+				var minutes = getMin();				
+				if (minutes == 0 ) 
+					return 0;
+				else {
+					var errors = (stringIncorrect($scope.typed, currentQuote).length/minutes).toFixed(0);
+					console.log(errors);
+					console.log($scope.WPM());
+					dataArr.push($scope.WPM() - errors);
+					timeArr.push(minutes);
+					console.log("d " + dataArr);
+					console.log("t " + timeArr)
+					return ($scope.WPM() - errors);
+				}
+				
+			}
+			else
+				return 0 ;
+		}
+
+		$scope.lineChartData = {
+        	labels: [
+        		timeArr[0], 
+        		timeArr[1], 
+        		timeArr[2]
+      		],
+      		datasets: [
+        		{
+          			data: [0, 5, 10, 15, 20, 25]
+        		}
+      		]
+    	};
+    
+    	$scope.activeData = $scope.lineChartData;		
 
 		$scope.nextQuote = function() {
 			//console.log("clicked");			
@@ -163,6 +199,9 @@ var counter = 0;
 var startTime = 0;
 var currTime = 0;
 
+var dataArr = [];
+var timeArr = [];
+
 function getCount() {
 	return counter;
 }
@@ -173,8 +212,10 @@ function setCount(num) {
 
 function incrCount() {
 	counter++;
-	if (counter == 1)
+	if (counter == 1) {
 		startTime = new Date();
+		//makeGraph();		
+	}		
 	currTime = new Date();
 	//console.log(counter);
 }

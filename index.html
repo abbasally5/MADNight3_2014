@@ -3,8 +3,11 @@
 
 		<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.3/angular.js"></script>
 		<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.3/angular-sanitize.js"></script>
+		<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/0.2.0/Chart.min.js"></script>
+
 		<script type="text/javascript" src="app.js"></script>
 		<script type="text/javascript" src="quote.js"></script>
+		<script type="text/javascript" src="angular-chartjs.js"></script>
 
 		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"	type="text/css" />
 		<link rel="stylesheet" type="text/css" href="style.css" />
@@ -17,13 +20,16 @@
 				<div class="navbar-header">
 					<h1>Local Hack Day</h1>
 				</div>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="chart.html"><h3>Chart</h3></a></li>
+				</ul>
 			</div>					
 		</div>
 		<div class="row">
 			<div class="content col-md-6 col-md-offset-3">
 				<div class="typing panel-primary" ng-controller="typeCtrl">
 					<div class="panel-heading">
-						<h3 >Typing Game</h3>
+						<h3>Typing Game</h3>
 					</div>
 					<div class="panel-body" 
 					ng-bind-html="highlightText()">					
@@ -40,30 +46,47 @@
 							<div class="panel-heading">
 								<h4>Accuracy</h4>
 							</div>
-							<div class="panel-body" id="stat1" 
-								ng-bind-html="accuracy()">
+							<div class="panel-body" id="stat1" >
+								<span ng-bind-html="accuracy()"><span>%</span></span>
 							</div>
 						</div>
 						<div class="lpm panel-primary col-xs-3">
 							<div class="panel-heading">
-								<h4>LPM</WPM>
+								<h4>LPM</h4>
 							</div>
-							<div class="panel-body" id="stat2" 
-								ng-bind-html="LPM()">
+							<div class="panel-body" id="stat2" >
+								<span ng-bind-html="LPM()"></span>
 							</div>
 						</div>
 						<div class="wpm panel-primary col-xs-3">
 							<div class="panel-heading">
-								<h4>WPM</WPM>
+								<h4>WPM</h4>
 							</div>
-							<div class="panel-body" id="stat2" 
-								ng-bind-html="WPM()">
+							<div class="panel-body" id="stat3" >
+								<span ng-bind-html="WPM()"></span>
+
+							</div>
+						</div>
+						<div class="netWpm panel-primary col-xs-3">
+							<div class="panel-heading">
+								<h4>Net WPM</h4>
+							</div>
+							<div class="panel-body" id="stat4" >
+								<span ng-bind-html="netWPM()"></span>
 							</div>
 						</div>
 					</div>
-					
+					<!--
+					<div class="charts">
+						<section class="test-chart" style="width: 100%; height: 600px;">
+							<div class="chart-container" style="width: 50%; margin: 0 auto; height: 70%;">
+								<cjs-line dataset="activeData" responsive="true"></cjs-line>
+							</div>
+						</section> 
+					</div>-->
 
 				</div>
+				
 
 			</div> 
 

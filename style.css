@@ -12,8 +12,16 @@
 	background: Black;
 }*/
 
+
+body {
+	font-family: 'Roboto', sans-serif;
+	background: #fefdfb;
+}
+
+
 span {
 	font-size: 24px;
+	text-align: center;
 }
 
 span.correct {
@@ -22,4 +30,8 @@ span.correct {
 
 span.incorrect {
 	color: red;
+}
+
+.panel > .panel-body + .list-group .list-group-item:first-child {
+  border-bottom: 1px solid #dddddd;
 }
